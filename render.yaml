@@ -37,15 +37,14 @@ services:
       - key: FRONTEND_URL
         fromService:
           name: q-bioforge-frontend
-          type: static
+          type: static_site
           property: host
 
   # ----------------------------------------------------------------------------
   # Frontend Static Site (React 18 + Vite Production Build)
   # ----------------------------------------------------------------------------
-  - type: static
+  - type: static_site
     name: q-bioforge-frontend
-    runtime: static
     rootDir: Frontend
     buildCommand: npm install && npm run build
     staticPublishPath: dist
