@@ -1,6 +1,6 @@
 """FastAPI REST API routes for NISQ Noise Lab and Noise Sensitivity Analysis."""
 
-from typing import Any, Dict, List
+from typing import Any, Dict, List, Optional
 import numpy as np
 from fastapi import APIRouter, HTTPException
 from pydantic import BaseModel, Field
