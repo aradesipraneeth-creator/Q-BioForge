@@ -1,10 +1,20 @@
-/**
- * API Service for communicating with the Q-BioForge FastAPI backend.
- * Supports configurable VITE_API_BASE_URL for Render production deployment.
- */
+function getApiBase() {
+  const envUrl = import.meta.env.VITE_API_BASE_URL;
+  if (envUrl && envUrl.trim()) {
+    return envUrl.trim().replace(/\/+$/, '');
+  }
+  // In production browser environment on Render / public web
+  if (typeof window !== 'undefined' && window.location && window.location.hostname) {
+    const host = window.location.hostname;
+    if (host !== 'localhost' && host !== '127.0.0.1') {
+      return 'https://q-bioforge-backend.onrender.com';
+    }
+  }
+  // Local development fallback to Vite proxy
+  return '';
+}
 
-const rawBaseUrl = import.meta.env.VITE_API_BASE_URL || '';
-export const API_BASE = rawBaseUrl.replace(/\/+$/, '');
+export const API_BASE = getApiBase();
 
 /**
  * Check backend health status.
