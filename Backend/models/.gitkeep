@@ -1,0 +1,2 @@
+# Q-BioForge Models Registry Directory
+# Trained PyTorch (.pth) and quantum circuit parameter checkpoints (.npz / .json) are stored here.

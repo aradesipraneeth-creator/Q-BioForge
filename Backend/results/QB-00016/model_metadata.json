@@ -1,0 +1,17 @@
+{
+  "experiment_id": "QB-00016",
+  "model_name": "vqc",
+  "framework": "pennylane",
+  "checkpoint_file": "quantum_parameters.npz",
+  "feature_names": [
+    "PCA_Component_1",
+    "PCA_Component_2",
+    "PCA_Component_3",
+    "PCA_Component_4"
+  ],
+  "feature_count": 4,
+  "qubit_count": 4,
+  "circuit_depth": 2,
+  "is_fitted": true,
+  "timestamp": "2026-09-27T10:09:44.361624+00:00"
+}

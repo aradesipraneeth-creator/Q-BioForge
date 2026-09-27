@@ -1,0 +1,62 @@
+# ==============================================================================
+# Q-BIOFORGE — RENDER PRODUCTION DEPLOYMENT BLUEPRINT (render.yaml)
+# ==============================================================================
+# Infrastructure:
+# - Service 1: q-bioforge-backend (FastAPI Python Web Service)
+# - Service 2: q-bioforge-frontend (React + Vite Static Site)
+# ==============================================================================
+
+services:
+  # ----------------------------------------------------------------------------
+  # Backend Web Service (FastAPI / PennyLane / PyTorch / Classical ML)
+  # ----------------------------------------------------------------------------
+  - type: web
+    name: q-bioforge-backend
+    runtime: python
+    rootDir: Backend
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn app.main:app --host 0.0.0.0 --port $PORT
+    plan: free
+    healthCheckPath: /health
+    autoDeploy: true
+    envVars:
+      - key: ENVIRONMENT
+        value: production
+      - key: HOST
+        value: 0.0.0.0
+      - key: COMPUTE_BACKEND
+        value: render-local
+      - key: MAX_PUBLIC_QUBITS
+        value: "8"
+      - key: MAX_PUBLIC_DEPTH
+        value: "4"
+      - key: MAX_PUBLIC_EXPERIMENTS
+        value: "2"
+      - key: MAX_PUBLIC_RUNTIME_SECONDS
+        value: "60"
+      - key: FRONTEND_URL
+        fromService:
+          name: q-bioforge-frontend
+          type: static
+          property: host
+
+  # ----------------------------------------------------------------------------
+  # Frontend Static Site (React 18 + Vite Production Build)
+  # ----------------------------------------------------------------------------
+  - type: static
+    name: q-bioforge-frontend
+    runtime: static
+    rootDir: Frontend
+    buildCommand: npm install && npm run build
+    staticPublishPath: dist
+    autoDeploy: true
+    routes:
+      - type: rewrite
+        source: /*
+        destination: /index.html
+    envVars:
+      - key: VITE_API_BASE_URL
+        fromService:
+          name: q-bioforge-backend
+          type: web
+          property: host

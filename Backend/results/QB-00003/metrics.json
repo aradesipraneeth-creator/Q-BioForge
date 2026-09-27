@@ -1,0 +1,56 @@
+{
+  "experiment_id": "QB-00003",
+  "model": "svm",
+  "dataset": "breast_cancer_wisconsin",
+  "training_time_seconds": 0.044428,
+  "inference_time_seconds": 0.005765,
+  "train_metrics": {
+    "accuracy": 0.9824,
+    "precision": 0.9765,
+    "recall": 0.996,
+    "f1_score": 0.9861,
+    "roc_auc": 0.997,
+    "sensitivity": 0.996,
+    "specificity": 0.9595,
+    "brier_score": 0.0119,
+    "confusion_matrix": {
+      "tn": 142,
+      "fp": 6,
+      "fn": 1,
+      "tp": 249
+    }
+  },
+  "validation_metrics": {
+    "accuracy": 0.9765,
+    "precision": 1.0,
+    "recall": 0.9623,
+    "f1_score": 0.9808,
+    "roc_auc": 1.0,
+    "sensitivity": 0.9623,
+    "specificity": 1.0,
+    "brier_score": 0.0141,
+    "confusion_matrix": {
+      "tn": 32,
+      "fp": 0,
+      "fn": 2,
+      "tp": 51
+    }
+  },
+  "test_metrics": {
+    "accuracy": 0.9767,
+    "precision": 0.9643,
+    "recall": 1.0,
+    "f1_score": 0.9818,
+    "roc_auc": 0.9959,
+    "sensitivity": 1.0,
+    "specificity": 0.9375,
+    "brier_score": 0.0255,
+    "confusion_matrix": {
+      "tn": 30,
+      "fp": 2,
+      "fn": 0,
+      "tp": 54
+    }
+  },
+  "evaluation_protocol": "Stratified 70/15/15, fitted strictly on train split, test evaluated once."
+}
